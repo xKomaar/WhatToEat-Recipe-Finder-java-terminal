@@ -1,5 +1,6 @@
 package pl.whatToEat.Controller;
 
+import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
@@ -27,7 +28,8 @@ public class MainController {
         Terminal terminal = null;
 
         try {
-            terminal = terminalFactory.createTerminal();
+            terminal = terminalFactory.setInitialTerminalSize(new TerminalSize(100,30)).createTerminal();
+
             Screen screen = new TerminalScreen(terminal);
             screen.startScreen();
 
