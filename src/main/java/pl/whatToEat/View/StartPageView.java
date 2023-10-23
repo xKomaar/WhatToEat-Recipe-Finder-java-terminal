@@ -68,15 +68,15 @@ public class StartPageView {
                 textGraphics.putString(19, maxY - i + 21, title19);
                 textGraphics.putString(19, maxY - i + 22, title20);
                 screen.refresh();
-                Thread.sleep(110);
+                Thread.sleep(80);
             }
-            Thread.sleep(1000);
+            Thread.sleep(500);
             textGraphics.putString(38, 28, "<Press ENTER to Start>", SGR.BOLD, SGR.BLINK);
             screen.refresh();
 
             KeyStroke keyStroke = screen.readInput();
             while(keyStroke.getKeyType() != KeyType.Enter) {
-
+                keyStroke = screen.readInput();
             }
 
         } catch (IOException e) {
