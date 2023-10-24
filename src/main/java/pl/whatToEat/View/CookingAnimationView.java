@@ -24,9 +24,9 @@ public class CookingAnimationView {
         String title9 = "         |==============================================|         \n";
         String title10 = "            |---==================================---|            \n";
         String title11 = "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@";
-        String title12 = "@-------------@@@@ ";
+        String title12 = "@--------------@@@@ ";
         String title12_1 = "<Your Recipes are Cooking>";
-        String title12_2 = " @@@@---------------@";
+        String title12_2 = " @@@@--------------@";
         String title13 = "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@";
 
         try {
@@ -46,8 +46,8 @@ public class CookingAnimationView {
             textGraphics.putString(16, 26, title10);
             textGraphics.putString(16, 27, title11);
             textGraphics.putString(16, 28, title12);
-            textGraphics.putString(16+19, 28, title12_1, SGR.BOLD, SGR.BLINK);
-            textGraphics.putString(16+19+26, 28, title12_2);
+            textGraphics.putString(16+20, 28, title12_1, SGR.BOLD, SGR.BLINK);
+            textGraphics.putString(16+20+26, 28, title12_2);
             textGraphics.putString(16, 29, title13);
             screen.refresh();
 
