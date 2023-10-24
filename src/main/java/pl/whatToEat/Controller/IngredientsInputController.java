@@ -68,8 +68,10 @@ public class IngredientsInputController {
                         }
                     }
                     case SHOW_RECIPES -> {
-                        calculateRecipesController.run(screen, ingredientList);
-                        return;
+                        if(!ingredientList.isEmpty()) {
+                            calculateRecipesController.run(screen, ingredientList);
+                            return;
+                        }
                     }
                 }
             } catch (IOException e) {

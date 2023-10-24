@@ -13,7 +13,6 @@ public final class RecipeJsonParser {
 
     private RecipeJsonParser() {
         recipeList = new ArrayList<>();
-
         JSONParser parser = new JSONParser();
         try {
             Object obj = parser.parse(new FileReader("src/main/resources/recipes.json"));
@@ -31,7 +30,9 @@ public final class RecipeJsonParser {
                 for (Object ingredient : ingredientJsonArray) {
                     ingredientList.add((String)ingredient);
                 }
-                recipeList.add(new Recipe(title, ingredientList, instructions));
+                if(!ingredientList.isEmpty()) {
+                    recipeList.add(new Recipe(title, ingredientList, instructions));
+                }
             }
         }catch(Exception e) {
             e.printStackTrace();

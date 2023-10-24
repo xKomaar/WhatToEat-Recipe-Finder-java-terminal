@@ -7,4 +7,10 @@ public class Selectors {
         DELETE_INGREDIENT,
         SHOW_RECIPES
     }
+
+    public static enum SpoonPosition{
+        RIGHT,
+        MIDDLE,
+        LEFT
+    }
 }
