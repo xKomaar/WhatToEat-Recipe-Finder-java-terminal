@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public final class RecipeJsonParser {
 
     private static RecipeJsonParser instance;
-    private final ArrayList<RecipeModel> recipeList;
+    private final ArrayList<Recipe> recipeList;
 
     private RecipeJsonParser() {
         recipeList = new ArrayList<>();
@@ -31,14 +31,14 @@ public final class RecipeJsonParser {
                 for (Object ingredient : ingredientJsonArray) {
                     ingredientList.add((String)ingredient);
                 }
-                recipeList.add(new RecipeModel(title, ingredientList, instructions));
+                recipeList.add(new Recipe(title, ingredientList, instructions));
             }
         }catch(Exception e) {
             e.printStackTrace();
         }
     }
 
-    public static ArrayList<RecipeModel> getRecipeList() {
+    public static ArrayList<Recipe> getRecipeList() {
         if(instance == null) {
             instance = new RecipeJsonParser();
         }

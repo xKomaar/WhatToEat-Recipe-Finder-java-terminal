@@ -6,7 +6,7 @@ import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import pl.whatToEat.Model.RecipeJsonParser;
-import pl.whatToEat.Model.RecipeModel;
+import pl.whatToEat.Model.Recipe;
 import pl.whatToEat.View.StartPageView;
 
 import java.io.IOException;
@@ -16,8 +16,6 @@ public class MainController {
 
     public static void main(String[] args) {
         IngredientsInputController ingredientsInputController = new IngredientsInputController();
-
-        ArrayList<RecipeModel> recipeList = RecipeJsonParser.getRecipeList();
 
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
         Terminal terminal = null;

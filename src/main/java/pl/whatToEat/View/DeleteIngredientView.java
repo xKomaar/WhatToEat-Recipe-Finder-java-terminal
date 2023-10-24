@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 public class DeleteIngredientView {
-    public static void printDeleteView(Screen screen) throws RuntimeException, InterruptedException {
+    public static void printDeleteView(Screen screen) throws RuntimeException {
         try {
             screen.clear();
 

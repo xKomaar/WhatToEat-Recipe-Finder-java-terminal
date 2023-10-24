@@ -16,14 +16,16 @@ import java.util.ArrayList;
 public class IngredientsInputController {
     private ArrayList<String> ingredientList;
 
-    private DeleteIngredientController deleteIngredientController;
+    private final DeleteIngredientController deleteIngredientController;
+    private final CalculateRecipesController calculateRecipesController;
 
     public IngredientsInputController() {
-        ingredientList = new ArrayList<>();
         deleteIngredientController = new DeleteIngredientController();
+        calculateRecipesController = new CalculateRecipesController();
     }
 
     public void run(Screen screen) throws InterruptedException {
+        ingredientList = new ArrayList<>();
         Selectors.InputIngredientsSelectors selector = Selectors.InputIngredientsSelectors.ADD_INGREDIENT;
 
         while(true) {
@@ -58,12 +60,16 @@ public class IngredientsInputController {
                     }
                     keyStroke = screen.readInput();
                 }
-                if(selector == Selectors.InputIngredientsSelectors.ADD_INGREDIENT) {
-                    this.addIngredient(screen);
-                }
-                else if(selector == Selectors.InputIngredientsSelectors.DELETE_INGREDIENT) {
-                    if(ingredientList != null && !ingredientList.isEmpty()) {
-                        deleteIngredientController.deleteIngredient(screen, ingredientList);
+                switch (selector) {
+                    case ADD_INGREDIENT -> this.addIngredient(screen);
+                    case DELETE_INGREDIENT -> {
+                        if(ingredientList != null && !ingredientList.isEmpty()) {
+                            deleteIngredientController.deleteIngredient(screen, ingredientList);
+                        }
+                    }
+                    case SHOW_RECIPES -> {
+                        calculateRecipesController.run(screen, ingredientList);
+                        return;
                     }
                 }
             } catch (IOException e) {
