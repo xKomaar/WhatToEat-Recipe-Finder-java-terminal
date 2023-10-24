@@ -1,9 +1,8 @@
 package pl.whatToEat.View;
 
 import com.googlecode.lanterna.SGR;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
-import com.googlecode.lanterna.input.KeyStroke;
-import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
 import pl.whatToEat.Model.Selectors;
 
@@ -33,6 +32,7 @@ public class CookingAnimationView {
             final TextGraphics textGraphics = screen.newTextGraphics();
 
             screen.clear();
+            textGraphics.setForegroundColor(new TextColor.RGB(255, 102, 102));
             textGraphics.putString(16, 16, title0);
             textGraphics.putString(16, 17, title1);
             textGraphics.putString(15, 18, title2);
@@ -44,9 +44,12 @@ public class CookingAnimationView {
             textGraphics.putString(16, 24, title8);
             textGraphics.putString(16, 25, title9);
             textGraphics.putString(16, 26, title10);
+            textGraphics.setForegroundColor(new TextColor.RGB(96, 96, 96));
             textGraphics.putString(16, 27, title11);
             textGraphics.putString(16, 28, title12);
+            textGraphics.setForegroundColor(new TextColor.RGB(255, 51, 51));
             textGraphics.putString(16+20, 28, title12_1, SGR.BOLD, SGR.BLINK);
+            textGraphics.setForegroundColor(new TextColor.RGB(96, 96, 96));
             textGraphics.putString(16+20+26, 28, title12_2);
             textGraphics.putString(16, 29, title13);
             screen.refresh();
@@ -118,6 +121,7 @@ public class CookingAnimationView {
         try {
             final TextGraphics textGraphics = screen.newTextGraphics();
 
+            textGraphics.setForegroundColor(new TextColor.RGB(224, 224, 224));
             textGraphics.putString(16, 1, title0);
             textGraphics.putString(16, 2, title1);
             textGraphics.putString(16, 3, title2);

@@ -5,12 +5,10 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
-import pl.whatToEat.Model.RecipeJsonParser;
-import pl.whatToEat.Model.Recipe;
 import pl.whatToEat.View.StartPageView;
 
 import java.io.IOException;
-import java.util.ArrayList;
+
 
 public class MainController {
 

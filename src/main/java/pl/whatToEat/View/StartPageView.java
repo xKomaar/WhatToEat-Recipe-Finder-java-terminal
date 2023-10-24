@@ -6,7 +6,6 @@ import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
-import com.googlecode.lanterna.terminal.Terminal;
 
 import java.io.IOException;
 
@@ -46,6 +45,7 @@ public class StartPageView {
 
             for (int i = 1; i < maxY-1; i++) {
                 screen.clear();
+                textGraphics.setForegroundColor(new TextColor.RGB(255, 178, 102));
                 textGraphics.putString(19, maxY - i, title0);
                 textGraphics.putString(19, maxY - i + 1, title1);
                 textGraphics.putString(19, maxY - i + 2, title2);
@@ -53,6 +53,7 @@ public class StartPageView {
                 textGraphics.putString(19, maxY - i + 4, title4);
                 textGraphics.putString(19, maxY - i + 5, title5);
                 textGraphics.putString(19, maxY - i + 6, title6);
+                textGraphics.setForegroundColor(new TextColor.RGB(153, 76, 0));
                 textGraphics.putString(19, maxY - i + 8, title7);
                 textGraphics.putString(19, maxY - i + 9, title8);
                 textGraphics.putString(19, maxY - i + 10, title9);
@@ -60,6 +61,7 @@ public class StartPageView {
                 textGraphics.putString(19, maxY - i + 12, title11);
                 textGraphics.putString(19, maxY - i + 13, title12);
                 textGraphics.putString(19, maxY - i + 14, title13);
+                textGraphics.setForegroundColor(new TextColor.RGB(255, 178, 102));
                 textGraphics.putString(19, maxY - i + 16, title14);
                 textGraphics.putString(19, maxY - i + 17, title15);
                 textGraphics.putString(19, maxY - i + 18, title16);
@@ -71,6 +73,7 @@ public class StartPageView {
                 Thread.sleep(80);
             }
             Thread.sleep(500);
+            textGraphics.setForegroundColor(TextColor.ANSI.DEFAULT);
             textGraphics.putString(38, 28, "<Press ENTER to Start>", SGR.BOLD, SGR.BLINK);
             screen.refresh();
 
