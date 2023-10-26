@@ -17,7 +17,7 @@ public class IngredientsInputView {
             screen.clear();
 
             final TextGraphics textGraphics = screen.newTextGraphics();
-
+            textGraphics.setForegroundColor(new TextColor.RGB(153,255,1));
             textGraphics.putString(0, 0," _____      _            __   __                _____                         _ _            _       \n", SGR.BOLD);
             textGraphics.putString(0, 1,"|  ___|    | |           \\ \\ / /               |_   _|                       | (_)          | |      \n", SGR.BOLD);
             textGraphics.putString(0, 2,"| |__ _ __ | |_ ___ _ __  \\ V /___  _   _ _ __   | | _ __   __ _ _ __ ___  __| |_  ___ _ __ | |_ ___ \n", SGR.BOLD);
@@ -27,6 +27,7 @@ public class IngredientsInputView {
             textGraphics.putString(0, 6,"                                                              __/ |                                    \n", SGR.BOLD);
             textGraphics.putString(0, 7,"                                                             |___/                                     ", SGR.BOLD);
 
+            textGraphics.setForegroundColor(TextColor.ANSI.DEFAULT);
             if(ingredientList != null && !ingredientList.isEmpty()) {
                 int i=5, j=10;
                 textGraphics.putString(3, 8, "Your Ingredients:", SGR.BOLD);

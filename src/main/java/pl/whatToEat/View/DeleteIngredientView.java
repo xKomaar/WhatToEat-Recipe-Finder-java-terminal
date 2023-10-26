@@ -15,7 +15,7 @@ public class DeleteIngredientView {
             screen.clear();
 
             final TextGraphics textGraphics = screen.newTextGraphics();
-
+            textGraphics.setForegroundColor(new TextColor.RGB(230,106,106));
             textGraphics.putString(1, 0, " _____ _                                          _____                         _ _            _   \n", SGR.BOLD);
             textGraphics.putString(1, 1, "/  __ \\ |                                        |_   _|                       | (_)          | |  \n", SGR.BOLD);
             textGraphics.putString(1, 2, "| /  \\/ |__   ___   ___  ___  ___    __ _ _ __     | | _ __   __ _ _ __ ___  __| |_  ___ _ __ | |_ \n", SGR.BOLD);
@@ -25,6 +25,7 @@ public class DeleteIngredientView {
             textGraphics.putString(1, 6, "                                                              __/ |                                \n", SGR.BOLD);
             textGraphics.putString(1, 7, "                                                             |___/                                 ", SGR.BOLD);
 
+            textGraphics.setForegroundColor(TextColor.ANSI.DEFAULT);
             textGraphics.putString(5, 28, "<Press Enter to Delete>", SGR.BOLD);
             textGraphics.putString(70, 28, "<Press Escape to Cancel>", SGR.BOLD);
 
@@ -36,14 +37,14 @@ public class DeleteIngredientView {
         }
     }
 
-    public static void printIngredients(Screen screen, ArrayList<String> ingredientList, int index) throws RuntimeException, InterruptedException {
+    public static void printIngredients(Screen screen, ArrayList<String> ingredientList, int selectedIndex) throws RuntimeException, InterruptedException {
         try {
             final TextGraphics textGraphics = screen.newTextGraphics();
 
             int i=3, j=9;
             for (String s : ingredientList) {
 
-                if (ingredientList.indexOf(s) == index) {
+                if (ingredientList.indexOf(s) == selectedIndex) {
                     textGraphics.setForegroundColor(new TextColor.RGB(255, 51, 51));
                     textGraphics.putString(i, j, s + "     ", SGR.BOLD, SGR.BLINK);
                 }

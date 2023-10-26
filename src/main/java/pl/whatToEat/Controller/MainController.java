@@ -11,17 +11,17 @@ import java.io.IOException;
 
 
 public class MainController {
+    private IngredientsInputController ingredientsInputController;
+    private Screen screen;
 
-    public static void main(String[] args) {
-        IngredientsInputController ingredientsInputController = new IngredientsInputController();
-
+    public void run() {
+        ingredientsInputController = new IngredientsInputController(this);
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
         Terminal terminal = null;
-
         try {
             terminal = terminalFactory.setInitialTerminalSize(new TerminalSize(101,30)).createTerminal();
 
-            Screen screen = new TerminalScreen(terminal);
+            screen = new TerminalScreen(terminal);
             screen.startScreen();
 
             StartPageView.printStartPage(screen);
@@ -38,6 +38,13 @@ public class MainController {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+    public  void reset() {
+        try {
+            ingredientsInputController.run(screen);
+        } catch (InterruptedException e) {
+            e.printStackTrace();;
         }
     }
 }

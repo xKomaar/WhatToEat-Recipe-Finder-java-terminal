@@ -12,16 +12,16 @@ import pl.whatToEat.View.RecipeView;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.prefs.PreferenceChangeEvent;
 
 public class CalculateRecipesController {
 
     private ArrayList<Recipe> recipeList;
-    private RecipeCalculator recipeCalculator;
-    private boolean lastPage;
+    private final RecipeCalculator recipeCalculator;
+    private final MainController mainController;
 
-    public CalculateRecipesController() {
+    public CalculateRecipesController(MainController mainController) {
         recipeCalculator = new RecipeCalculator(50);
+        this.mainController = mainController;
     }
 
     public void run(Screen screen, ArrayList<String> ingredientList) {
@@ -31,20 +31,24 @@ public class CalculateRecipesController {
         try {
             for(int i=0; i < 4; i++) {
                 CookingAnimationView.printSpoon(screen, Selectors.SpoonPosition.RIGHT);
-                Thread.sleep(250);
+                Thread.sleep(200);
                 CookingAnimationView.printSpoon(screen, Selectors.SpoonPosition.MIDDLE);
-                Thread.sleep(250);
+                Thread.sleep(200);
                 CookingAnimationView.printSpoon(screen, Selectors.SpoonPosition.LEFT);
-                Thread.sleep(250);
+                Thread.sleep(200);
                 CookingAnimationView.printSpoon(screen, Selectors.SpoonPosition.MIDDLE);
-                Thread.sleep(250);
+                Thread.sleep(200);
             }
             int startIndex = 0, selectedIndex = 0, pageNumber = 1;
-            lastPage = false;
             RecipeListView.printList(screen, recipeList, startIndex, selectedIndex, pageNumber);
 
             KeyStroke keyStroke = screen.readInput();
-            while(keyStroke.getKeyType() != KeyType.Enter) {
+            while(keyStroke.getKeyType() != KeyType.Escape) {
+                if (keyStroke.getKeyType() == KeyType.Enter) {
+                    if(!recipeList.isEmpty()) {
+                        RecipeView.printRecipe(recipeList.get(selectedIndex));
+                    }
+                }
                 if (keyStroke.getKeyType() == KeyType.ArrowDown) {
                     selectedIndex++;
                     if(selectedIndex > startIndex+7 || selectedIndex == recipeList.size()) {
@@ -64,41 +68,31 @@ public class CalculateRecipesController {
                     if(recipeList.size() > 8) {
                         startIndex += 8;
                         pageNumber++;
-                        lastPage = false;
                         if(startIndex >= recipeList.size()) {
                             startIndex = 0;
                             pageNumber = 1;
-                            lastPage = true;
                         }
                         selectedIndex = startIndex;
-                    }
-                    else {
-                        lastPage = true;
                     }
                 }
                 if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
                     if(recipeList.size() > 8) {
                         startIndex -= 8;
                         pageNumber--;
-                        lastPage = false;
                         if(startIndex < 0) {
                             startIndex = recipeList.size() - recipeList.size()%8;
                             pageNumber = recipeList.size()/8;
                             if(recipeList.size()%8 != 0) {
                                 pageNumber++;
                             }
-                            lastPage = true;
                         }
                         selectedIndex = startIndex;
-                    }
-                    else {
-                        lastPage = true;
                     }
                 }
                 RecipeListView.printList(screen, recipeList, startIndex, selectedIndex, pageNumber);
                 keyStroke = screen.readInput();
             }
-            RecipeView.printRecipe(recipeList.get(selectedIndex));
+            mainController.reset();
 
         } catch (InterruptedException  | IOException e) {
             e.printStackTrace();

@@ -19,13 +19,13 @@ public class IngredientsInputController {
     private final DeleteIngredientController deleteIngredientController;
     private final CalculateRecipesController calculateRecipesController;
 
-    public IngredientsInputController() {
+    public IngredientsInputController(MainController mainController) {
         deleteIngredientController = new DeleteIngredientController();
-        calculateRecipesController = new CalculateRecipesController();
+        calculateRecipesController = new CalculateRecipesController(mainController);
+        ingredientList = new ArrayList<>();
     }
 
     public void run(Screen screen) throws InterruptedException {
-        ingredientList = new ArrayList<>();
         Selectors.InputIngredientsSelectors selector = Selectors.InputIngredientsSelectors.ADD_INGREDIENT;
 
         while(true) {

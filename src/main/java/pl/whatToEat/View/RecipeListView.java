@@ -5,7 +5,6 @@ import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import org.w3c.dom.Text;
 import pl.whatToEat.Model.Recipe;
 
 import java.io.IOException;
@@ -17,6 +16,7 @@ public class RecipeListView {
             screen.clear();
 
             final TextGraphics textGraphics = screen.newTextGraphics();
+            textGraphics.setForegroundColor(new TextColor.RGB(255, 182, 1));
             textGraphics.putString(11, 0,"  ___             _ _       _     _       ______          _                 \n", SGR.BOLD);
             textGraphics.putString(11, 1," / _ \\           (_) |     | |   | |      | ___ \\        (_)                \n", SGR.BOLD);
             textGraphics.putString(11, 2,"/ /_\\ \\_   ____ _ _| | __ _| |__ | | ___  | |_/ /___  ___ _ _ __   ___  ___ \n", SGR.BOLD);
@@ -26,8 +26,10 @@ public class RecipeListView {
             textGraphics.putString(11, 6,"                                                           | |              \n", SGR.BOLD);
             textGraphics.putString(11, 7,"                                                           |_|              ", SGR.BOLD);
 
+            textGraphics.setForegroundColor(TextColor.ANSI.DEFAULT);
             textGraphics.putString(5, 26, "<Left Arrow - Previous Page>", SGR.BOLD);
             textGraphics.putString(5, 28, "<Arrow Up/Down - Select Recipes>", SGR.BOLD);
+            textGraphics.putString(33, 27, "<Escape - Go Back to Ingredient Input>", SGR.BOLD);
             textGraphics.putString(70, 28, "<Enter - Read a Recipe>", SGR.BOLD);
             textGraphics.putString(70, 26, "<Right Arrow - Next Page>", SGR.BOLD);
             textGraphics.putString(90, 23, "Page " + pageNumber, SGR.BOLD);
@@ -44,6 +46,13 @@ public class RecipeListView {
             screen.clear();
             printRecipeListView(screen, pageNumber);
             final TextGraphics textGraphics = screen.newTextGraphics();
+            if(recipeList.isEmpty()) {
+                textGraphics.setForegroundColor(new TextColor.RGB(255, 51, 51));
+                textGraphics.putString(19, 14, "Unfortunately, no recipes were found for given ingredients.", SGR.BOLD);
+                textGraphics.putString(23, 15, "Press Escape to go back to Ingredient Input Menu.", SGR.BOLD);
+                screen.refresh();
+                return;
+            }
             int row = 8;
 
             for(int i=startIndex; i<recipeList.size() && row <= 22; i++) {
