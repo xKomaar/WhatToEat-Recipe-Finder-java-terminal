@@ -23,7 +23,7 @@ public class CalculateRecipesController {
         recipeMap = recipeCalculator.calculateRecipes(ingredientList);
         CookingAnimationView.printPot(screen);
         try {
-            for(int i=0; i < 10; i++) {
+            for(int i=0; i < 4; i++) {
                 CookingAnimationView.printSpoon(screen, Selectors.SpoonPosition.RIGHT);
                 Thread.sleep(250);
                 CookingAnimationView.printSpoon(screen, Selectors.SpoonPosition.MIDDLE);
@@ -33,6 +33,12 @@ public class CalculateRecipesController {
                 CookingAnimationView.printSpoon(screen, Selectors.SpoonPosition.MIDDLE);
                 Thread.sleep(250);
             }
+
+
+            Recipe recipe = recipeMap.firstEntry().getValue();
+            System.out.println(recipe.title());
+            System.out.println(recipe.instructions());
+            recipe.ingredientList().forEach(System.out::println);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

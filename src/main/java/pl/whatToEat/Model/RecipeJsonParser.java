@@ -26,11 +26,11 @@ public final class RecipeJsonParser {
                 instructions = instructions.substring(0, instructions.length()/2); //instructions in recipes.json are duplicated
 
                 JSONArray ingredientJsonArray = (JSONArray) recipeJson.get("ingredients");
-                ArrayList<String> ingredientList = new ArrayList<>();
+                ArrayList<Ingredient> ingredientList = new ArrayList<>();
                 for (Object ingredient : ingredientJsonArray) {
-                    ingredientList.add((String)ingredient);
+                    ingredientList.add(new Ingredient((String)ingredient));
                 }
-                if(!ingredientList.isEmpty()) {
+                if(!ingredientList.isEmpty() && !title.equals("") && !instructions.equals("")) {
                     recipeList.add(new Recipe(title, ingredientList, instructions));
                 }
             }

@@ -83,7 +83,7 @@ public class IngredientsInputController {
     public void addIngredient(Screen screen) {
         final WindowBasedTextGUI textGUI = new MultiWindowTextGUI(screen);
         String input = new TextInputDialogBuilder()
-                .setTitle("Enter an ingredient")
+                .setTitle("Enter an Ingredient (Single Form)")
                 .setTextBoxSize(new TerminalSize(1,1))
                 .build()
                 .showDialog(textGUI);
