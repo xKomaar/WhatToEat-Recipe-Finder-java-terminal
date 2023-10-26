@@ -45,26 +45,29 @@ public class StartPageView {
 
             for (int i = 1; i < maxY-1; i++) {
                 screen.clear();
-                textGraphics.setForegroundColor(new TextColor.RGB(255, 178, 102));
+                textGraphics.setForegroundColor(new TextColor.RGB(250, 171, 62));
                 textGraphics.putString(19, maxY - i, title0);
                 textGraphics.putString(19, maxY - i + 1, title1);
                 textGraphics.putString(19, maxY - i + 2, title2);
                 textGraphics.putString(19, maxY - i + 3, title3);
+                textGraphics.setForegroundColor(new TextColor.RGB(130,230,1));
                 textGraphics.putString(19, maxY - i + 4, title4);
                 textGraphics.putString(19, maxY - i + 5, title5);
+                textGraphics.setForegroundColor(new TextColor.RGB(255,255,1));
                 textGraphics.putString(19, maxY - i + 6, title6);
-                textGraphics.setForegroundColor(new TextColor.RGB(153, 76, 0));
                 textGraphics.putString(19, maxY - i + 8, title7);
                 textGraphics.putString(19, maxY - i + 9, title8);
+                textGraphics.setForegroundColor(new TextColor.RGB(163,56,21));
                 textGraphics.putString(19, maxY - i + 10, title9);
                 textGraphics.putString(19, maxY - i + 11, title10);
                 textGraphics.putString(19, maxY - i + 12, title11);
                 textGraphics.putString(19, maxY - i + 13, title12);
+                textGraphics.setForegroundColor(new TextColor.RGB(236,53,33));
                 textGraphics.putString(19, maxY - i + 14, title13);
-                textGraphics.setForegroundColor(new TextColor.RGB(255, 178, 102));
                 textGraphics.putString(19, maxY - i + 16, title14);
                 textGraphics.putString(19, maxY - i + 17, title15);
                 textGraphics.putString(19, maxY - i + 18, title16);
+                textGraphics.setForegroundColor(new TextColor.RGB(250, 171, 62));
                 textGraphics.putString(19, maxY - i + 19, title17);
                 textGraphics.putString(19, maxY - i + 20, title18);
                 textGraphics.putString(19, maxY - i + 21, title19);
