@@ -16,14 +16,19 @@ public class DeleteIngredientView {
 
             final TextGraphics textGraphics = screen.newTextGraphics();
 
-            textGraphics.putString(18, 0, " __    _  _  __ __    _       ___    __ _  __ _ ___ __   ___\n", SGR.BOLD);
-            textGraphics.putString(18, 1, "/  |_|/ \\/ \\(_ |_    |_||\\|    | |\\|/__|_)|_ | \\ | |_ |\\| | \n", SGR.BOLD);
-            textGraphics.putString(18, 2, "\\__| |\\_/\\_/__)|__   | || |   _|_| |\\_|| \\|__|_/_|_|__| | | ", SGR.BOLD);
+            textGraphics.putString(1, 0, " _____ _                                          _____                         _ _            _   \n", SGR.BOLD);
+            textGraphics.putString(1, 1, "/  __ \\ |                                        |_   _|                       | (_)          | |  \n", SGR.BOLD);
+            textGraphics.putString(1, 2, "| /  \\/ |__   ___   ___  ___  ___    __ _ _ __     | | _ __   __ _ _ __ ___  __| |_  ___ _ __ | |_ \n", SGR.BOLD);
+            textGraphics.putString(1, 3, "| |   | '_ \\ / _ \\ / _ \\/ __|/ _ \\  / _` | '_ \\    | || '_ \\ / _` | '__/ _ \\/ _` | |/ _ \\ '_ \\| __|\n", SGR.BOLD);
+            textGraphics.putString(1, 4, "| \\__/\\ | | | (_) | (_) \\__ \\  __/ | (_| | | | |  _| || | | | (_| | | |  __/ (_| | |  __/ | | | |_ \n", SGR.BOLD);
+            textGraphics.putString(1, 5, " \\____/_| |_|\\___/ \\___/|___/\\___|  \\__,_|_| |_|  \\___/_| |_|\\__, |_|  \\___|\\__,_|_|\\___|_| |_|\\__|\n", SGR.BOLD);
+            textGraphics.putString(1, 6, "                                                              __/ |                                \n", SGR.BOLD);
+            textGraphics.putString(1, 7, "                                                             |___/                                 ", SGR.BOLD);
 
             textGraphics.putString(5, 28, "<Press Enter to Delete>", SGR.BOLD);
             textGraphics.putString(70, 28, "<Press Escape to Cancel>", SGR.BOLD);
 
-            textGraphics.drawLine(0, 26, 100, 26, new TextCharacter('_', TextColor.ANSI.WHITE, TextColor.ANSI.BLACK, SGR.BOLD));
+            textGraphics.drawLine(0, 26, 101, 26, new TextCharacter('_', TextColor.ANSI.WHITE, TextColor.ANSI.BLACK, SGR.BOLD));
             screen.refresh();
 
         } catch (IOException e) {
@@ -35,19 +40,21 @@ public class DeleteIngredientView {
         try {
             final TextGraphics textGraphics = screen.newTextGraphics();
 
-            int i=18, j=5;
+            int i=3, j=9;
             for (String s : ingredientList) {
 
                 if (ingredientList.indexOf(s) == index) {
-                    textGraphics.putString(i, j, s + "     ", SGR.BOLD);
+                    textGraphics.setForegroundColor(new TextColor.RGB(255, 51, 51));
+                    textGraphics.putString(i, j, s + "     ", SGR.BOLD, SGR.BLINK);
                 }
                 else {
+                    textGraphics.setForegroundColor(TextColor.ANSI.DEFAULT);
                     textGraphics.putString(i, j, s + "     ");
                 }
 
                 i += s.length() + 5;
-                if(i > 70) {
-                    i=18;
+                if(i > 85) {
+                    i=3;
                     j += 2;
                 }
             }

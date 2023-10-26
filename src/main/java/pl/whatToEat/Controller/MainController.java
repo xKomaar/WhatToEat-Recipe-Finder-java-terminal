@@ -19,7 +19,7 @@ public class MainController {
         Terminal terminal = null;
 
         try {
-            terminal = terminalFactory.setInitialTerminalSize(new TerminalSize(100,30)).createTerminal();
+            terminal = terminalFactory.setInitialTerminalSize(new TerminalSize(101,30)).createTerminal();
 
             Screen screen = new TerminalScreen(terminal);
             screen.startScreen();

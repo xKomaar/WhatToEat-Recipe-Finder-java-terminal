@@ -18,13 +18,18 @@ public class IngredientsInputView {
 
             final TextGraphics textGraphics = screen.newTextGraphics();
 
-            textGraphics.putString(1, 0,"____ _  _ ___ ____ ____    _   _ ____ _  _ ____    _ _  _ ____ ____ ____ ___  _ ____ _  _ ___ ____ \n", SGR.BOLD);
-            textGraphics.putString(1, 1,"|___ |\\ |  |  |___ |__/     \\_/  |  | |  | |__/    | |\\ | | __ |__/ |___ |  \\ | |___ |\\ |  |  [__  \n", SGR.BOLD);
-            textGraphics.putString(1, 2,"|___ | \\|  |  |___ |  \\      |   |__| |__| |  \\    | | \\| |__] |  \\ |___ |__/ | |___ | \\|  |  ___] \n", SGR.BOLD);
+            textGraphics.putString(0, 0," _____      _            __   __                _____                         _ _            _       \n", SGR.BOLD);
+            textGraphics.putString(0, 1,"|  ___|    | |           \\ \\ / /               |_   _|                       | (_)          | |      \n", SGR.BOLD);
+            textGraphics.putString(0, 2,"| |__ _ __ | |_ ___ _ __  \\ V /___  _   _ _ __   | | _ __   __ _ _ __ ___  __| |_  ___ _ __ | |_ ___ \n", SGR.BOLD);
+            textGraphics.putString(0, 3,"|  __| '_ \\| __/ _ \\ '__|  \\ // _ \\| | | | '__|  | || '_ \\ / _` | '__/ _ \\/ _` | |/ _ \\ '_ \\| __/ __|\n", SGR.BOLD);
+            textGraphics.putString(0, 4,"| |__| | | | ||  __/ |     | | (_) | |_| | |    _| || | | | (_| | | |  __/ (_| | |  __/ | | | |_\\__ \\\n", SGR.BOLD);
+            textGraphics.putString(0, 5,"\\____/_| |_|\\__\\___|_|     \\_/\\___/ \\__,_|_|    \\___/_| |_|\\__, |_|  \\___|\\__,_|_|\\___|_| |_|\\__|___/\n", SGR.BOLD);
+            textGraphics.putString(0, 6,"                                                              __/ |                                    \n", SGR.BOLD);
+            textGraphics.putString(0, 7,"                                                             |___/                                     ", SGR.BOLD);
 
             if(ingredientList != null && !ingredientList.isEmpty()) {
-                int i=5, j=7;
-                textGraphics.putString(3, 5, "Your Ingredients:", SGR.BOLD);
+                int i=5, j=10;
+                textGraphics.putString(3, 8, "Your Ingredients:", SGR.BOLD);
                 for (String s : ingredientList) {
                     textGraphics.putString(i, j, s);
                     i += s.length();
@@ -38,7 +43,7 @@ public class IngredientsInputView {
                     }
                 }
             }
-            textGraphics.drawLine(0, 26, 100, 26, new TextCharacter('_', TextColor.ANSI.WHITE, TextColor.ANSI.BLACK, SGR.BOLD));
+            textGraphics.drawLine(0, 26, 101, 26, new TextCharacter('_', TextColor.ANSI.WHITE, TextColor.ANSI.BLACK, SGR.BOLD));
             screen.refresh();
 
         } catch (IOException e) {
