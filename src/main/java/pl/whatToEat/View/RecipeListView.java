@@ -29,7 +29,7 @@ public class RecipeListView {
             textGraphics.setForegroundColor(TextColor.ANSI.DEFAULT);
             textGraphics.putString(5, 26, "<Left Arrow - Previous Page>", SGR.BOLD);
             textGraphics.putString(5, 28, "<Arrow Up/Down - Select Recipes>", SGR.BOLD);
-            textGraphics.putString(33, 27, "<Escape - Go Back to Ingredient Input>", SGR.BOLD);
+            textGraphics.putString(47, 27, "<Escape - Go Back>", SGR.BOLD);
             textGraphics.putString(70, 28, "<Enter - Read a Recipe>", SGR.BOLD);
             textGraphics.putString(70, 26, "<Right Arrow - Next Page>", SGR.BOLD);
             textGraphics.putString(90, 23, "Page " + pageNumber, SGR.BOLD);
