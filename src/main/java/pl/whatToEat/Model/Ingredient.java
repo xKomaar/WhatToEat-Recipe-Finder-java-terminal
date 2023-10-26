@@ -10,11 +10,11 @@ public class Ingredient {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public boolean isAvailable() {
-        return available;
+        return this.available;
     }
 
     public void setAvailable(boolean available) {

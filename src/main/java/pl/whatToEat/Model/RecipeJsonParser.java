@@ -38,7 +38,7 @@ public final class RecipeJsonParser {
             e.printStackTrace();
         }
     }
-
+    //Singleton
     public static ArrayList<Recipe> getRecipeList() {
         if(instance == null) {
             instance = new RecipeJsonParser();

@@ -7,11 +7,12 @@ import pl.whatToEat.Model.Selectors;
 import pl.whatToEat.View.CookingAnimationView;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.TreeMap;
 
 public class CalculateRecipesController {
 
-    private TreeMap<Integer, Recipe> recipeMap;
+    private ArrayList<Recipe> recipeList;
     private RecipeCalculator recipeCalculator;
 
     public CalculateRecipesController() {
@@ -20,7 +21,7 @@ public class CalculateRecipesController {
 
     public void run(Screen screen, ArrayList<String> ingredientList) {
 
-        recipeMap = recipeCalculator.calculateRecipes(ingredientList);
+        recipeList = recipeCalculator.calculateRecipes(ingredientList);
         CookingAnimationView.printPot(screen);
         try {
             for(int i=0; i < 4; i++) {
@@ -34,11 +35,20 @@ public class CalculateRecipesController {
                 Thread.sleep(250);
             }
 
+            if(!recipeList.isEmpty()) {
+                Recipe recipe = recipeList.get(0);
+                System.out.println(recipe.getMatchPercent());
+                System.out.println(recipe.getTitle());
+                System.out.println(recipe.getInstructions());
+                recipe.getIngredientList().forEach(System.out::println);
 
-            Recipe recipe = recipeMap.firstEntry().getValue();
-            System.out.println(recipe.title());
-            System.out.println(recipe.instructions());
-            recipe.ingredientList().forEach(System.out::println);
+                recipe = recipeList.get(1);
+                System.out.println(recipe.getMatchPercent());
+                System.out.println(recipe.getTitle());
+                System.out.println(recipe.getInstructions());
+                recipe.getIngredientList().forEach(System.out::println);
+
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

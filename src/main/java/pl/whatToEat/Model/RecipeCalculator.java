@@ -1,8 +1,7 @@
 package pl.whatToEat.Model;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.TreeMap;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class RecipeCalculator {
 
@@ -16,16 +15,16 @@ public class RecipeCalculator {
         this.threshold = threshold;
     }
 
-    public TreeMap<Integer, Recipe> calculateRecipes(ArrayList<String> ingredientsList) {
-        TreeMap<Integer, Recipe> recipeMap = new TreeMap<>(Comparator.reverseOrder());
+    public ArrayList<Recipe> calculateRecipes(ArrayList<String> ingredientsList) {
+        ArrayList<Recipe> outputRecipes = new ArrayList<>();
 
         for(Recipe recipe : recipeList) {
             int validIngredientCount = 0;
-            int recipeIngredientCount = recipe.ingredientList().size();
+            int recipeIngredientCount = recipe.getIngredientList().size();
             for(String usrIng : ingredientsList) {
                 String userIngredient = usrIng.toLowerCase();
 
-                for(Ingredient recIng : recipe.ingredientList()) {
+                for(Ingredient recIng : recipe.getIngredientList()) {
                     String recipeIngredientName = recIng.getName().toLowerCase();
 
                     if (recipeIngredientName.contains(userIngredient)) {
@@ -63,11 +62,29 @@ public class RecipeCalculator {
                     }
                 }
             }
-            int matchPercent = (validIngredientCount/recipeIngredientCount*100);
-            if(matchPercent > threshold) {
-                recipeMap.put(matchPercent, recipe);
+            int matchPercent = (int)(((double)validIngredientCount/(double)recipeIngredientCount)*100);
+            if(matchPercent >= threshold) {
+                recipe.setMatchPercent(matchPercent);
+                outputRecipes.add(recipe);
             }
         }
-        return recipeMap;
+        //Sorting the list, example: if both recipes have 100% match, then a recipe is chosen with the most amount of ingredients
+        outputRecipes.sort((o1,o2) -> {
+            if(o1.getMatchPercent() > o2.getMatchPercent()) {
+                return -1;
+            }
+            else if(o1.getMatchPercent() == o2.getMatchPercent()) {
+                if(o1.getIngredientList().size() > o2.getIngredientList().size()) {
+                    return -1;
+                }
+                else if (o1.getIngredientList().size() == o2.getIngredientList().size()){
+                    return 0;
+                }
+                else return 1;
+            }
+            else return 1;
+        });
+
+        return outputRecipes;
     }
 }
