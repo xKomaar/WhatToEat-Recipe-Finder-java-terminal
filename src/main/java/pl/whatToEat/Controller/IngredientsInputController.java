@@ -88,8 +88,11 @@ public class IngredientsInputController {
                 .build()
                 .showDialog(textGUI);
 
-        if(input != null && !input.equals("") && !ingredientList.contains(input)) {
-            ingredientList.add(input);
+        if(input != null) {
+            input = input.toLowerCase();
+            if(!input.equals("") && !ingredientList.contains(input)) {
+                ingredientList.add(input);
+            }
         }
     }
 }
