@@ -1,7 +1,7 @@
 package pl.whatToEat.Model;
 
 public class Ingredient {
-    private final String name;
+    private String name;
     private boolean available;
 
     public Ingredient(String name) {
@@ -19,6 +19,10 @@ public class Ingredient {
 
     public void setAvailable(boolean available) {
         this.available = available;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override
