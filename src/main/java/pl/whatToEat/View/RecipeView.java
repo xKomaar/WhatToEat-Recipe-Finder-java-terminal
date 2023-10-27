@@ -9,8 +9,6 @@ import pl.whatToEat.Model.Ingredient;
 import pl.whatToEat.Model.Recipe;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Locale;
 
 public class RecipeView {
 

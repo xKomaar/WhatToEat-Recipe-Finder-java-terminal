@@ -5,7 +5,6 @@ import com.googlecode.lanterna.TextCharacter;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
-import pl.whatToEat.Model.Ingredient;
 import pl.whatToEat.Model.Selectors;
 
 import java.io.IOException;
