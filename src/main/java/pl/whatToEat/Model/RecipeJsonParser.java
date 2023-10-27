@@ -3,7 +3,7 @@ package pl.whatToEat.Model;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 public final class RecipeJsonParser {
@@ -15,7 +15,7 @@ public final class RecipeJsonParser {
         recipeList = new ArrayList<>();
         JSONParser parser = new JSONParser();
         try {
-            Object obj = parser.parse(new FileReader("src/main/resources/recipes.json"));
+            Object obj = parser.parse(new InputStreamReader(this.getClass().getResourceAsStream("/recipes.json")));
             JSONArray recipeJsonArray = (JSONArray)obj;
 
             for (Object recipe : recipeJsonArray) {

@@ -5,6 +5,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import com.googlecode.lanterna.terminal.swing.TerminalEmulatorAutoCloseTrigger;
 import pl.whatToEat.View.StartPageView;
 
 import java.io.IOException;
@@ -19,7 +20,9 @@ public class MainController {
         DefaultTerminalFactory terminalFactory = new DefaultTerminalFactory();
         Terminal terminal = null;
         try {
-            terminal = terminalFactory.setInitialTerminalSize(new TerminalSize(101,30)).createTerminal();
+            terminal = terminalFactory.setTerminalEmulatorTitle("What to Eat: Recipe Finder")
+                    .setInitialTerminalSize(new TerminalSize(101,30))
+                    .createTerminal();
 
             screen = new TerminalScreen(terminal);
             screen.startScreen();
