@@ -38,24 +38,26 @@ public class RecipeView {
             textGraphics.putString(1, 10, "Ingredient List: ", SGR.BOLD);
             int pos1=1, pos2=11;
             for(Ingredient ingredient : recipe.getIngredientList()) {
-                if(ingredient.isAvailable()) {
-                    textGraphics.setForegroundColor(new TextColor.RGB(102,255,178));
-                } else {
-                    textGraphics.setForegroundColor(new TextColor.RGB(255,102,102));
-                }
-                if(pos1 > 80 || pos1+ingredient.getName().length() > 95) {
-                    pos1=1;
-                    pos2++;
-                }
-                if(ingredient.equals(recipe.getIngredientList().get(recipe.getIngredientList().size()-1))) {
-                    textGraphics.putString(pos1, pos2, ingredient.getName());
-                }
-                else {
-                    textGraphics.putString(pos1, pos2, ingredient.getName()+"; ");
-                    pos1+=2;
-                }
+                if(ingredient.getName().length() < 100) {
+                    if(ingredient.isAvailable()) {
+                        textGraphics.setForegroundColor(new TextColor.RGB(102,255,178));
+                    } else {
+                        textGraphics.setForegroundColor(new TextColor.RGB(255,102,102));
+                    }
+                    if(pos1 > 80 || pos1+ingredient.getName().length() > 95) {
+                        pos1=1;
+                        pos2++;
+                    }
+                    if(ingredient.equals(recipe.getIngredientList().get(recipe.getIngredientList().size()-1))) {
+                        textGraphics.putString(pos1, pos2, ingredient.getName());
+                    }
+                    else {
+                        textGraphics.putString(pos1, pos2, ingredient.getName()+"; ");
+                        pos1+=2;
+                    }
 
-                pos1 += ingredient.getName().length();
+                    pos1 += ingredient.getName().length();
+                }
             }
             textGraphics.setForegroundColor(TextColor.ANSI.DEFAULT);
             textGraphics.putString(1, 17, "Instuctions: ", SGR.BOLD);
