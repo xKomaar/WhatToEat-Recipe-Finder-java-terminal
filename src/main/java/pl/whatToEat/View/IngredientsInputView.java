@@ -32,18 +32,21 @@ public class IngredientsInputView {
                 int i=5, j=10;
                 textGraphics.putString(3, 8, "Your Ingredients:", SGR.BOLD);
                 for (String s : ingredientList) {
-                    textGraphics.putString(i, j, s);
-                    i += s.length();
-                    if (ingredientList.indexOf(s) != ingredientList.size()-1) {
-                        textGraphics.putString(i, j, ",  ");
-                    }
-                    i +=  3;
-                    if(i > 60) {
-                        i=5;
-                        j++;
+                    if(j < 25) {
+                        textGraphics.putString(i, j, s);
+                        i += s.length();
+                        if (ingredientList.indexOf(s) != ingredientList.size()-1) {
+                            textGraphics.putString(i, j, ",  ");
+                        }
+                        i +=  3;
+                        if(i > 60) {
+                            i=5;
+                            j++;
+                        }
                     }
                 }
             }
+            textGraphics.putString(78, 25, "<Press Escape to Exit>");
             textGraphics.drawLine(0, 26, 101, 26, new TextCharacter('_', TextColor.ANSI.WHITE, TextColor.ANSI.BLACK, SGR.BOLD));
             screen.refresh();
 
@@ -59,18 +62,27 @@ public class IngredientsInputView {
             switch (selector) {
                 case ADD_INGREDIENT -> {
                     textGraphics.putString(3, 28, "Add an Ingredient", SGR.BOLD, SGR.BLINK);
-                    textGraphics.putString(36, 28, "Delete an Ingredient" );
-                    textGraphics.putString(70, 28, "Calculate and Show Recipes");
+                    textGraphics.putString(29, 28, "Delete an Ingredient");
+                    textGraphics.putString(58, 28, "Calculate and Show Recipes");
+                    textGraphics.putString(90, 28, "Settings");
                 }
                 case DELETE_INGREDIENT -> {
                     textGraphics.putString(3, 28, "Add an Ingredient");
-                    textGraphics.putString(36, 28, "Delete an Ingredient", SGR.BOLD, SGR.BLINK );
-                    textGraphics.putString(70, 28, "Calculate and Show Recipes");
+                    textGraphics.putString(29, 28, "Delete an Ingredient", SGR.BOLD, SGR.BLINK);
+                    textGraphics.putString(58, 28, "Calculate and Show Recipes");
+                    textGraphics.putString(90, 28, "Settings");
                 }
                 case SHOW_RECIPES -> {
                     textGraphics.putString(3, 28, "Add an Ingredient");
-                    textGraphics.putString(36, 28, "Delete an Ingredient" );
-                    textGraphics.putString(70, 28, "Calculate and Show Recipes", SGR.BOLD, SGR.BLINK);
+                    textGraphics.putString(29, 28, "Delete an Ingredient");
+                    textGraphics.putString(58, 28, "Calculate and Show Recipes", SGR.BOLD, SGR.BLINK);
+                    textGraphics.putString(90, 28, "Settings");
+                }
+                case SETTINGS -> {
+                    textGraphics.putString(3, 28, "Add an Ingredient");
+                    textGraphics.putString(29, 28, "Delete an Ingredient");
+                    textGraphics.putString(58, 28, "Calculate and Show Recipes");
+                    textGraphics.putString(90, 28, "Settings", SGR.BOLD, SGR.BLINK);
                 }
             }
             screen.refresh();

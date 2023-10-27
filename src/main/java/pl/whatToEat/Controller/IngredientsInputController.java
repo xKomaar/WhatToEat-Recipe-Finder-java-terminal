@@ -12,16 +12,19 @@ import pl.whatToEat.View.IngredientsInputView;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class IngredientsInputController {
     private ArrayList<String> ingredientList;
 
     private final DeleteIngredientController deleteIngredientController;
     private final CalculateRecipesController calculateRecipesController;
+    private final SettingsController settingsController;
 
     public IngredientsInputController(MainController mainController) {
         deleteIngredientController = new DeleteIngredientController();
         calculateRecipesController = new CalculateRecipesController(mainController);
+        settingsController = new SettingsController();
         ingredientList = new ArrayList<>();
     }
 
@@ -33,13 +36,16 @@ public class IngredientsInputController {
             IngredientsInputView.printMenu(screen, selector);
             try {
                 KeyStroke keyStroke = screen.readInput();
-                while(keyStroke.getKeyType() != KeyType.Enter) {
+                while(keyStroke.getKeyType() != KeyType.Enter && keyStroke.getKeyType() != KeyType.Escape) {
                     if(keyStroke.getKeyType() == KeyType.ArrowRight) {
                         if(selector == Selectors.InputIngredientsSelectors.ADD_INGREDIENT) {
                             selector = Selectors.InputIngredientsSelectors.DELETE_INGREDIENT;
                         }
                         else if(selector == Selectors.InputIngredientsSelectors.DELETE_INGREDIENT) {
                             selector = Selectors.InputIngredientsSelectors.SHOW_RECIPES;
+                        }
+                        else if(selector == Selectors.InputIngredientsSelectors.SHOW_RECIPES) {
+                            selector = Selectors.InputIngredientsSelectors.SETTINGS;
                         }
                         else {
                             selector = Selectors.InputIngredientsSelectors.ADD_INGREDIENT;
@@ -48,6 +54,9 @@ public class IngredientsInputController {
                     }
                     if(keyStroke.getKeyType() == KeyType.ArrowLeft) {
                         if(selector == Selectors.InputIngredientsSelectors.ADD_INGREDIENT) {
+                            selector = Selectors.InputIngredientsSelectors.SETTINGS;
+                        }
+                        else if(selector == Selectors.InputIngredientsSelectors.SETTINGS) {
                             selector = Selectors.InputIngredientsSelectors.SHOW_RECIPES;
                         }
                         else if(selector == Selectors.InputIngredientsSelectors.SHOW_RECIPES) {
@@ -59,6 +68,9 @@ public class IngredientsInputController {
                         IngredientsInputView.printMenu(screen, selector);
                     }
                     keyStroke = screen.readInput();
+                }
+                if(keyStroke.getKeyType() == KeyType.Escape) {
+                    return;
                 }
                 switch (selector) {
                     case ADD_INGREDIENT -> this.addIngredient(screen);
@@ -73,6 +85,7 @@ public class IngredientsInputController {
                             return;
                         }
                     }
+                    case SETTINGS -> settingsController.run(screen);
                 }
             } catch (IOException e) {
                 throw new RuntimeException(e);
@@ -80,7 +93,7 @@ public class IngredientsInputController {
         }
     }
 
-    public void addIngredient(Screen screen) {
+    private void addIngredient(Screen screen) {
         final WindowBasedTextGUI textGUI = new MultiWindowTextGUI(screen);
         String input = new TextInputDialogBuilder()
                 .setTitle("Enter an Ingredient (Single Form)")
@@ -90,9 +103,17 @@ public class IngredientsInputController {
 
         if(input != null) {
             input = input.toLowerCase();
-            if(!input.equals("") && !ingredientList.contains(input)) {
+            if(!input.equals("") && !ingredientList.contains(input) && isAWord(input)) {
                 ingredientList.add(input);
             }
         }
+    }
+
+    private boolean isAWord(String s) {
+        Pattern pattern = Pattern.compile("[a-z]+");
+        if(pattern.matcher(s).matches()) {
+            return true;
+        }
+        return false;
     }
 }

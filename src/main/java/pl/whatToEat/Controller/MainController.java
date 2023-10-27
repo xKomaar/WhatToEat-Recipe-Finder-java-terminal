@@ -5,6 +5,7 @@ import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
+import pl.whatToEat.Model.Selectors;
 import pl.whatToEat.View.StartPageView;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class MainController {
             screen = new TerminalScreen(terminal);
             screen.startScreen();
 
-            StartPageView.printStartPage(screen);
+            //StartPageView.printStartPage(screen);
 
             ingredientsInputController.run(screen);
 

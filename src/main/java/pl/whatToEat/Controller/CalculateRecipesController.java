@@ -3,6 +3,7 @@ package pl.whatToEat.Controller;
 import com.googlecode.lanterna.input.KeyStroke;
 import com.googlecode.lanterna.input.KeyType;
 import com.googlecode.lanterna.screen.Screen;
+import pl.whatToEat.Model.Ingredient;
 import pl.whatToEat.Model.Recipe;
 import pl.whatToEat.Model.RecipeCalculator;
 import pl.whatToEat.Model.Selectors;
@@ -15,17 +16,17 @@ import java.util.ArrayList;
 
 public class CalculateRecipesController {
 
-    private ArrayList<Recipe> recipeList;
     private final RecipeCalculator recipeCalculator;
     private final MainController mainController;
 
     public CalculateRecipesController(MainController mainController) {
-        recipeCalculator = new RecipeCalculator(50);
+        recipeCalculator = new RecipeCalculator();
         this.mainController = mainController;
     }
 
     public void run(Screen screen, ArrayList<String> ingredientList) {
 
+        ArrayList<Recipe> recipeList;
         recipeList = recipeCalculator.calculateRecipes(ingredientList);
         CookingAnimationView.printPot(screen);
         try {
@@ -44,9 +45,22 @@ public class CalculateRecipesController {
 
             KeyStroke keyStroke = screen.readInput();
             while(keyStroke.getKeyType() != KeyType.Escape) {
+
                 if (keyStroke.getKeyType() == KeyType.Enter) {
                     if(!recipeList.isEmpty()) {
-                        RecipeView.printRecipe(recipeList.get(selectedIndex));
+                        RecipeView.printRecipe(screen, recipeList.get(selectedIndex));
+                        keyStroke = screen.readInput();
+                        while(keyStroke.getKeyType() != KeyType.Escape && keyStroke.getKeyType() != KeyType.Enter) {
+                            keyStroke = screen.readInput();
+                        }
+                        if(keyStroke.getKeyType() == KeyType.Enter) {
+                            RecipeView.printInstructions(screen, recipeList.get(selectedIndex).getInstructions());
+                            while(keyStroke.getKeyType() != KeyType.Escape) {
+                                keyStroke = screen.readInput();
+                            }
+                            RecipeView.printRecipe(screen, recipeList.get(selectedIndex));
+                            keyStroke = screen.readInput();
+                        }
                     }
                 }
                 if (keyStroke.getKeyType() == KeyType.ArrowDown) {
@@ -92,9 +106,16 @@ public class CalculateRecipesController {
                 RecipeListView.printList(screen, recipeList, startIndex, selectedIndex, pageNumber);
                 keyStroke = screen.readInput();
             }
+
+            //reset all ingredients availability
+            for(Recipe r : recipeList) {
+                for(Ingredient i : r.getIngredientList()) {
+                    i.setAvailable(false);
+                }
+            }
             mainController.reset();
 
-        } catch (InterruptedException  | IOException e) {
+        } catch (InterruptedException | IOException e) {
             e.printStackTrace();
         }
 

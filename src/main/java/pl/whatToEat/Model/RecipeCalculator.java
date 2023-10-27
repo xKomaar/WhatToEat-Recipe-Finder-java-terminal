@@ -7,12 +7,9 @@ public class RecipeCalculator {
 
     ArrayList<Recipe> recipeList;
 
-    private final int threshold;
-
-    public RecipeCalculator(int threshold) {
+    public RecipeCalculator() {
 
         recipeList = RecipeJsonParser.getRecipeList();
-        this.threshold = threshold;
     }
 
     public ArrayList<Recipe> calculateRecipes(ArrayList<String> ingredientsList) {
@@ -27,11 +24,12 @@ public class RecipeCalculator {
                 for(Ingredient recIng : recipe.getIngredientList()) {
                     String recipeIngredientName = recIng.getName().toLowerCase();
 
-                    if (recipeIngredientName.contains(userIngredient)) {
+                    if (recipeIngredientName.contains(userIngredient) && !recIng.isAvailable()) {
                         int index = recipeIngredientName.indexOf(userIngredient);
                         //check if ingredient is exact (unlikely)
                         if (recipeIngredientName.equals(userIngredient)) {
                             validIngredientCount++;
+                            recIng.setAvailable(true);
                         }
                         else {
                             //extract the word from the recipe ingredient depending on
@@ -63,27 +61,47 @@ public class RecipeCalculator {
                 }
             }
             int matchPercent = (int)(((double)validIngredientCount/(double)recipeIngredientCount)*100);
-            if(matchPercent >= threshold) {
+            if(matchPercent >= Selectors.matchThreshold) {
                 recipe.setMatchPercent(matchPercent);
                 outputRecipes.add(recipe);
             }
         }
-        //Sorting the list, example: if both recipes have 100% match, then a recipe is chosen with the most amount of ingredients
-        outputRecipes.sort((o1,o2) -> {
-            if(o1.getMatchPercent() > o2.getMatchPercent()) {
-                return -1;
-            }
-            else if(o1.getMatchPercent() == o2.getMatchPercent()) {
+        if(Selectors.sortByIngredientCountFirst) {
+            //sorting only by ingredient count
+            outputRecipes.sort((o1,o2) -> {
                 if(o1.getIngredientList().size() > o2.getIngredientList().size()) {
                     return -1;
                 }
-                else if (o1.getIngredientList().size() == o2.getIngredientList().size()){
-                    return 0;
+                else if(o1.getIngredientList().size() == o2.getIngredientList().size()) {
+                    if(o1.getMatchPercent() > o2.getMatchPercent()) {
+                        return -1;
+                    }
+                    else if (o1.getMatchPercent() == o2.getMatchPercent()){
+                        return 0;
+                    }
+                    else return 1;
                 }
                 else return 1;
-            }
-            else return 1;
-        });
+            });
+        }
+        else {
+            //Sorting the list, example: if both recipes have 100% match, then a recipe is chosen with the most amount of ingredients
+            outputRecipes.sort((o1,o2) -> {
+                if(o1.getMatchPercent() > o2.getMatchPercent()) {
+                    return -1;
+                }
+                else if(o1.getMatchPercent() == o2.getMatchPercent()) {
+                    if(o1.getIngredientList().size() > o2.getIngredientList().size()) {
+                        return -1;
+                    }
+                    else if (o1.getIngredientList().size() == o2.getIngredientList().size()){
+                        return 0;
+                    }
+                    else return 1;
+                }
+                else return 1;
+            });
+        }
 
         return outputRecipes;
     }
