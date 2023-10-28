@@ -34,14 +34,16 @@ public class RecipeCalculator {
                             //extract the word from the recipe ingredient depending on
                             //if there is a space in user ingredient
                             StringBuilder recipeWord = new StringBuilder();
-                            if(userIngredient.contains(" ")) {
+                            if(userIngredient.contains(" ") || userIngredient.contains("-")) {
                                 for(int i = index; i < index+userIngredient.length(); i++) {
                                     recipeWord.append(recipeIngredientName.charAt(i));
                                 }
                             }
                             else {
-                                for(int i = index; i < recipeIngredientName.length() && recipeIngredientName.charAt(i) != ' '; i++) {
-                                    recipeWord.append(recipeIngredientName.charAt(i));
+                                if(index > 0 && recipeIngredientName.charAt(index-1) != '-') {
+                                    for(int i = index; i < recipeIngredientName.length() && recipeIngredientName.charAt(i) != ' ' && recipeIngredientName.charAt(i) != '-'; i++) {
+                                        recipeWord.append(recipeIngredientName.charAt(i));
+                                    }
                                 }
                             }
 
