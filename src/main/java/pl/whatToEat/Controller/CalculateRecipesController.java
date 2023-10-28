@@ -9,7 +9,7 @@ import pl.whatToEat.Model.RecipeCalculator;
 import pl.whatToEat.Model.Selectors;
 import pl.whatToEat.View.CookingAnimationView;
 import pl.whatToEat.View.RecipeListView;
-import pl.whatToEat.View.RecipeView;
+
 
 import java.io.IOException;
 import java.util.ArrayList;
