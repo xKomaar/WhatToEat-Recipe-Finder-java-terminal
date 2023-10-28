@@ -40,7 +40,7 @@ public class RecipeCalculator {
                                 }
                             }
                             else {
-                                if(index > 0 && recipeIngredientName.charAt(index-1) != '-') {
+                                if(index > 0 && recipeIngredientName.charAt(index-1) == ' ') {
                                     for(int i = index; i < recipeIngredientName.length() && recipeIngredientName.charAt(i) != ' ' && recipeIngredientName.charAt(i) != '-'; i++) {
                                         recipeWord.append(recipeIngredientName.charAt(i));
                                     }
