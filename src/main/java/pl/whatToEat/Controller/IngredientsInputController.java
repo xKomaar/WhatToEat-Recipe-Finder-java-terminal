@@ -110,7 +110,7 @@ public class IngredientsInputController {
     }
 
     private boolean isAWord(String s) {
-        Pattern pattern = Pattern.compile("[a-z]+");
+        Pattern pattern = Pattern.compile("[a-z\\s]+");
         if(pattern.matcher(s).matches()) {
             return true;
         }
