@@ -42,7 +42,7 @@ public class SettingsView {
             final TextGraphics textGraphics = screen.newTextGraphics();
             switch (chosenSetting) {
                 case THRESHOLD -> {
-                    textGraphics.putString(5, 9, "Match Threshold: " + Selectors.matchThreshold + " (Default 50, Recommended 70+)", SGR.BOLD);
+                    textGraphics.putString(5, 9, "Match Threshold: " + Selectors.matchThreshold + " (Default = 50)", SGR.BOLD);
                     if(Selectors.sortByIngredientCountFirst) {
                         textGraphics.putString(5, 11, "Sorting: First By Ingredient Count, then by Match Percent");
                     }

@@ -59,8 +59,8 @@ public class RecipeListView {
                 if(selectedIndex == i) {
                     textGraphics.setForegroundColor(new TextColor.RGB(51, 255, 255));
                     textGraphics.putString(3, row, recipeList.get(i).getTitle()+": ", SGR.BOLD);
-                    textGraphics.putString(5+recipeList.get(i).getTitle().length(), row, "Ingredient Match: " + recipeList.get(i).getMatchPercent() + "%, ", SGR.BOLD);
-                    textGraphics.putString(29+recipeList.get(i).getTitle().length(), row, "Ingredient Count: " + recipeList.get(i).getIngredientList().size(), SGR.BOLD);
+                    textGraphics.putString(5+recipeList.get(i).getTitle().length(), row, "Match: " + recipeList.get(i).getMatchPercent() + "%, ", SGR.BOLD);
+                    textGraphics.putString(18+recipeList.get(i).getTitle().length(), row, "Ingredients: " + recipeList.get(i).getIngredientList().size(), SGR.BOLD);
                 }
                 else {
                     textGraphics.setForegroundColor(TextColor.ANSI.DEFAULT);
@@ -74,9 +74,9 @@ public class RecipeListView {
                     } else if (recipeList.get(i).getMatchPercent() < 60) {
                         textGraphics.setForegroundColor(new TextColor.RGB(255, 51, 51));
                     }
-                    textGraphics.putString(5+recipeList.get(i).getTitle().length(), row, "Ingredient Match: " + recipeList.get(i).getMatchPercent() + "%, ");
+                    textGraphics.putString(5+recipeList.get(i).getTitle().length(), row, "Match: " + recipeList.get(i).getMatchPercent() + "%, ");
                     textGraphics.setForegroundColor(TextColor.ANSI.DEFAULT);
-                    textGraphics.putString(29+recipeList.get(i).getTitle().length(), row, "Ingredient Count: " + recipeList.get(i).getIngredientList().size());
+                    textGraphics.putString(18+recipeList.get(i).getTitle().length(), row, "Ingredients: " + recipeList.get(i).getIngredientList().size());
                 }
                 row += 2;
             }

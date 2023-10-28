@@ -53,16 +53,19 @@ public class RecipeView {
                 }
                 if(ingredient.equals(recipe.getIngredientList().get(recipe.getIngredientList().size()-1))) {
                     textGraphics.putString(pos1, pos2, ingredient.getName());
+                    pos1 += ingredient.getName().length();
                 }
                 else {
-                    textGraphics.putString(pos1, pos2, ingredient.getName()+"; ");
+                    textGraphics.putString(pos1, pos2, ingredient.getName());
+                    pos1 += ingredient.getName().length();
+                    textGraphics.setForegroundColor(TextColor.ANSI.DEFAULT);
+                    textGraphics.putString(pos1, pos2, "; ", SGR.BOLD);
                     pos1+=2;
                 }
-                    pos1 += ingredient.getName().length();
             }
             textGraphics.setForegroundColor(TextColor.ANSI.DEFAULT);
-            textGraphics.putString(1, 17, "Instuctions: ", SGR.BOLD);
-            pos2 = 18;
+            pos2+=2;
+            textGraphics.putString(1, pos2++, "Instuctions: ", SGR.BOLD);
             String str = "";
             for(int i = 0; i<recipe.getInstructions().length(); i++) {
                 if((str.length() > 80 && (recipe.getInstructions().charAt(i) == ',' || recipe.getInstructions().charAt(i) == '.'

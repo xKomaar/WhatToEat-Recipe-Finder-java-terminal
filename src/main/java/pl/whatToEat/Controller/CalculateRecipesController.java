@@ -17,10 +17,12 @@ import java.util.ArrayList;
 public class CalculateRecipesController {
 
     private final RecipeCalculator recipeCalculator;
+    private final RecipeController recipeController;
     private final MainController mainController;
 
     public CalculateRecipesController(MainController mainController) {
         recipeCalculator = new RecipeCalculator();
+        recipeController = new RecipeController();
         this.mainController = mainController;
     }
 
@@ -48,26 +50,16 @@ public class CalculateRecipesController {
 
                 if (keyStroke.getKeyType() == KeyType.Enter) {
                     if(!recipeList.isEmpty()) {
-                        RecipeView.printRecipe(screen, recipeList.get(selectedIndex));
-                        keyStroke = screen.readInput();
-                        while(keyStroke.getKeyType() != KeyType.Escape && keyStroke.getKeyType() != KeyType.Enter) {
-                            keyStroke = screen.readInput();
-                        }
-                        if(keyStroke.getKeyType() == KeyType.Enter) {
-                            RecipeView.printInstructions(screen, recipeList.get(selectedIndex).getInstructions());
-                            while(keyStroke.getKeyType() != KeyType.Escape) {
-                                keyStroke = screen.readInput();
-                            }
-                            RecipeView.printRecipe(screen, recipeList.get(selectedIndex));
-                            keyStroke = screen.readInput();
-                        }
+                        recipeController.run(screen,recipeList.get(selectedIndex));
                     }
+                    RecipeListView.printList(screen, recipeList, startIndex, selectedIndex, pageNumber);
                 }
                 if (keyStroke.getKeyType() == KeyType.ArrowDown) {
                     selectedIndex++;
                     if(selectedIndex > startIndex+7 || selectedIndex == recipeList.size()) {
                         selectedIndex = startIndex;
                     }
+                    RecipeListView.printList(screen, recipeList, startIndex, selectedIndex, pageNumber);
                 }
                 if (keyStroke.getKeyType() == KeyType.ArrowUp) {
                     selectedIndex--;
@@ -77,6 +69,7 @@ public class CalculateRecipesController {
                             selectedIndex = recipeList.size()-1;
                         }
                     }
+                    RecipeListView.printList(screen, recipeList, startIndex, selectedIndex, pageNumber);
                 }
                 if (keyStroke.getKeyType() == KeyType.ArrowRight) {
                     if(recipeList.size() > 8) {
@@ -88,6 +81,7 @@ public class CalculateRecipesController {
                         }
                         selectedIndex = startIndex;
                     }
+                    RecipeListView.printList(screen, recipeList, startIndex, selectedIndex, pageNumber);
                 }
                 if (keyStroke.getKeyType() == KeyType.ArrowLeft) {
                     if(recipeList.size() > 8) {
@@ -102,8 +96,8 @@ public class CalculateRecipesController {
                         }
                         selectedIndex = startIndex;
                     }
+                    RecipeListView.printList(screen, recipeList, startIndex, selectedIndex, pageNumber);
                 }
-                RecipeListView.printList(screen, recipeList, startIndex, selectedIndex, pageNumber);
                 keyStroke = screen.readInput();
             }
 
