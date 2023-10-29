@@ -20,11 +20,15 @@ public class RecipeController {
 
             RecipeView.printRecipe(screen, recipe);
             KeyStroke keyStroke = screen.readInput();
-            while(keyStroke.getKeyType() != KeyType.Escape && keyStroke.getKeyType() != KeyType.Enter) {
+            while(keyStroke.getKeyType() != KeyType.Escape && keyStroke.getKeyType() != KeyType.Enter && keyStroke.getKeyType() != KeyType.EOF) {
                 keyStroke = screen.readInput();
             }
             if(keyStroke.getKeyType() == KeyType.Enter) {
                 instructionsController.run(screen, recipe);
+            }
+            if(keyStroke.getKeyType() == KeyType.EOF) {
+                screen.close();
+                System.exit(1);
             }
         } catch (IOException e) {
             e.printStackTrace();

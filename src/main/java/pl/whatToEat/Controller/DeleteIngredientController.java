@@ -16,7 +16,7 @@ public class DeleteIngredientController {
             DeleteIngredientView.printIngredients(screen, ingredientList, index);
 
             KeyStroke keyStroke = screen.readInput();
-            while(keyStroke.getKeyType() != KeyType.Enter && keyStroke.getKeyType() != KeyType.Escape) {
+            while(keyStroke.getKeyType() != KeyType.Enter && keyStroke.getKeyType() != KeyType.Escape && keyStroke.getKeyType() != KeyType.EOF) {
                 if (keyStroke.getKeyType() == KeyType.ArrowRight) {
                     index++;
                     if(index == ingredientList.size()) {
@@ -35,6 +35,10 @@ public class DeleteIngredientController {
             }
             if(keyStroke.getKeyType() == KeyType.Enter) {
                 ingredientList.remove(index);
+            }
+            if(keyStroke.getKeyType() == KeyType.EOF) {
+                screen.close();
+                System.exit(1);
             }
 
         } catch (IOException e) {

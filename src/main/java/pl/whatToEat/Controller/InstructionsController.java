@@ -19,8 +19,12 @@ public class InstructionsController {
         try {
             RecipeView.printInstructions(screen, recipe.getInstructions());
             KeyStroke keyStroke = screen.readInput();
-            while(keyStroke.getKeyType() != KeyType.Escape) {
+            while(keyStroke.getKeyType() != KeyType.Escape && keyStroke.getKeyType() != KeyType.EOF) {
                 keyStroke = screen.readInput();
+            }
+            if(keyStroke.getKeyType() == KeyType.EOF) {
+                screen.close();
+                System.exit(1);
             }
             recipeController.run(screen, recipe);
         } catch (IOException e) {

@@ -20,7 +20,7 @@ public class SettingsController {
         SettingsView.printSettingsList(screen, selector);
         try {
             KeyStroke keyStroke = screen.readInput();
-            while (keyStroke.getKeyType() != KeyType.Escape) {
+            while (keyStroke.getKeyType() != KeyType.Escape && keyStroke.getKeyType() != KeyType.EOF) {
                 if(keyStroke.getKeyType() == KeyType.ArrowUp) {
                     if(selector == Selectors.ChosenSetting.SORT) {
                         selector = Selectors.ChosenSetting.THRESHOLD;
@@ -55,6 +55,10 @@ public class SettingsController {
                     SettingsView.printSettingsList(screen, selector);
                 }
                 keyStroke = screen.readInput();
+            }
+            if(keyStroke.getKeyType() == KeyType.EOF) {
+                screen.close();
+                System.exit(1);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);

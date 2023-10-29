@@ -81,8 +81,12 @@ public class StartPageView {
             screen.refresh();
 
             KeyStroke keyStroke = screen.readInput();
-            while(keyStroke.getKeyType() != KeyType.Enter) {
+            while(keyStroke.getKeyType() != KeyType.Enter && keyStroke.getKeyType() != KeyType.EOF) {
                 keyStroke = screen.readInput();
+            }
+            if(keyStroke.getKeyType() == KeyType.EOF) {
+                screen.close();
+                System.exit(1);
             }
 
         } catch (IOException e) {

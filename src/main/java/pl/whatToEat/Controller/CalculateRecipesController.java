@@ -46,7 +46,7 @@ public class CalculateRecipesController {
             RecipeListView.printList(screen, recipeList, startIndex, selectedIndex, pageNumber);
 
             KeyStroke keyStroke = screen.readInput();
-            while(keyStroke.getKeyType() != KeyType.Escape) {
+            while(keyStroke.getKeyType() != KeyType.Escape && keyStroke.getKeyType() != KeyType.EOF) {
 
                 if (keyStroke.getKeyType() == KeyType.Enter) {
                     if(!recipeList.isEmpty()) {
@@ -99,6 +99,10 @@ public class CalculateRecipesController {
                     RecipeListView.printList(screen, recipeList, startIndex, selectedIndex, pageNumber);
                 }
                 keyStroke = screen.readInput();
+            }
+            if(keyStroke.getKeyType() == KeyType.EOF) {
+                screen.close();
+                System.exit(1);
             }
 
             //reset all ingredients availability

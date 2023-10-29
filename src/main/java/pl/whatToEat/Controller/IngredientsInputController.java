@@ -36,7 +36,7 @@ public class IngredientsInputController {
             IngredientsInputView.printMenu(screen, selector);
             try {
                 KeyStroke keyStroke = screen.readInput();
-                while(keyStroke.getKeyType() != KeyType.Enter && keyStroke.getKeyType() != KeyType.Escape) {
+                while(keyStroke.getKeyType() != KeyType.Enter && keyStroke.getKeyType() != KeyType.Escape && keyStroke.getKeyType() != KeyType.EOF) {
                     if(keyStroke.getKeyType() == KeyType.ArrowRight) {
                         if(selector == Selectors.InputIngredientsSelectors.ADD_INGREDIENT) {
                             selector = Selectors.InputIngredientsSelectors.DELETE_INGREDIENT;
@@ -71,6 +71,10 @@ public class IngredientsInputController {
                 }
                 if(keyStroke.getKeyType() == KeyType.Escape) {
                     return;
+                }
+                if(keyStroke.getKeyType() == KeyType.EOF) {
+                    screen.close();
+                    System.exit(1);
                 }
                 switch (selector) {
                     case ADD_INGREDIENT -> this.addIngredient(screen);
